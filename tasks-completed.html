@@ -13,24 +13,53 @@
     .complete {
       text-decoration: line-through;
     }
+    * {
+      box-sizing: border-box;
+    }
+      .wrapper {
+        display: grid;
+        grid-template-columns: 33.3% 33.3% 33.3%; 
+      }
+
+      // demo & defaults
+      .box {
+          background-color: #444;
+          color: #fff;
+          padding: 1em;
+      }
   </style>
 
   </head>
   <body>
     <h1>Hello, world!</h1>
 
-    <div id="app">
-      {{ message }}
-      <br>
-      <p>the value of the input is: {{message}}</p>
-      <p></p>
-      <input type="text" id="input" v-model="newName" >
-      <button v-on:click="addName(message)">add</button>
-      <ul>
-        <li v-for="(task, key) in tasks" v-on:click="toggleCompleted(key)"><div :class="{complete: task.completed}"> <input type="checkbox" v-bind:checked="task.completed"> {{ task.description }}</div></li>
-      </ul>
-    </div>
-
+    <div class="container">
+        <div id="app" class="wrapper">
+          <div class="box a">
+            {{ message }}
+            <br>
+            <p>the value of the input is: {{message}}</p>
+            <p></p>
+            <input type="text" id="input" v-model="newName" >
+            <button v-on:click="addName(message)">add</button>
+            <ul>
+              <li v-for="(task, key) in tasks" v-on:click="toggleCompleted(key)"><div :class="{complete: task.completed}"> <input type="checkbox" v-bind:checked="task.completed"> {{ task.description }}</div></li>
+            </ul>
+          </div>
+          <div class="box b">
+            <h2>Completed tasks:</h2>
+            <ul>
+              <li v-if="task.completed" v-for="(task, key) in tasks"><div :class="{complete: task.completed}"> {{ task.description }}</div></li>
+            </ul>
+          </div>
+          <div class="box c">
+            <h2>Incomplete tasks:</h2>
+              <ul>
+                <li v-if="! task.completed" v-for="(task, key) in tasks"><div :class="{complete: task.completed}"> {{ task.description }}</div></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     
 
     <!-- Optional JavaScript -->
